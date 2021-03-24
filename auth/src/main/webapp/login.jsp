@@ -9,7 +9,11 @@
     <title>Login</title>
 </head>
 <body>
-<form method="POST" action="/auth/login?redirect=${param.redirect}">
+<%
+    String redirect=request.getParameter("redirectUrl");
+%>
+<div><%=redirect  %></div>
+<form method="POST" action="/login?redirectUrl=${param.redirectUrl}">
     <div style="color: red">${error}</div>
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
