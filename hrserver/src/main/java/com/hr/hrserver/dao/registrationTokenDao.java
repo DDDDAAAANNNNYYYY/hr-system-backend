@@ -1,4 +1,5 @@
 package com.hr.hrserver.dao;
 
-public class registrationTokenDao {
+public interface registrationTokenDao {
+    public boolean isValidToken(String token);
 }
