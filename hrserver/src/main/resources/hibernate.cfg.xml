@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    
+    	<!-- Hibernate 连接数据库的基本信息 -->
+    	<property name="connection.username">admin</property>
+    	<property name="connection.password">2021hrproject</property>
+    	<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    	<property name="connection.url">jdbc:mysql://database-1.cuauwqypczjx.us-east-2.rds.amazonaws.com:3306/test</property>
+
+		<!-- Hibernate 的基本配置 -->
+		<!-- Hibernate 使用的数据库方言 -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+	
+		<!-- 运行时是否打印 SQL -->
+    	<property name="show_sql">true</property>
+    
+    	<!-- 运行时是否格式化 SQL -->
+    	<property name="format_sql">true</property>
+    
+    	<!-- 生成数据表的策略 -->
+    	<property name="hbm2ddl.auto">update</property>
+    	
+    	<!-- 设置 Hibernate 的事务隔离级别 -->
+    	<property name="connection.isolation">2</property>
+    	
+    	<!-- 删除对象后, 使其 OID 置为 null -->
+    	<property name="use_identifier_rollback">true</property>
+    	
+
+		
+    	<mapping class="com.hr.hrserver.pojo.User"/>
+		<mapping class="com.hr.hrserver.pojo.Employee"/>
+		<mapping class="com.hr.hrserver.pojo.RegistrationToken"/>
+
+    
+    </session-factory>
+</hibernate-configuration>
