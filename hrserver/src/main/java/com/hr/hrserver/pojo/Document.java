@@ -10,24 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Data
 @Setter
 @Getter
+@Data
 @Entity
-@Table(name="VisaStatus")
-public class VisaStatus {
+@Table(name="PersonalDocument")
+public class Document {
     @Id
     int ID;
     @Column(name="EmployeeID")
     int EmployeeID;
-    @Column(name="VisaType")
-    String VisaType;
-    @Column(name="Active")
-    int Active;
-    @Column(name="ModificationDate")
-    Date ModifiecationDate;
-    @Column(name="VisaStartDate")
-    Date VisaStartDate;
-    @Column(name="VisaEndDate")
-    Date VisaEndDate;
+    @Column(name="Path")
+    String path;
+    @Column(name="Title")
+    String Title;
+    @Column(name="Comment")
+    String Comment;
+    @Column(name="CreatedDate")
+    Date CreatedDate;
+
 }

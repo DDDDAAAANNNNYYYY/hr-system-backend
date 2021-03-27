@@ -22,6 +22,8 @@ public class Employee {
     String LastName;
     @Column(name="MiddleName")
     String MiddleName;
+    @Column(name="PreferredName")
+    String PreferredName;
     @Column(name="Email")
     String Email;
     @Column(name="CellPhone")
@@ -46,10 +48,18 @@ public class Employee {
     String Avatar;
     @Column(name="Car")
     String Car;
+    @Column(name="CarModel")
+    String CarModel;
+    @Column(name="CarColor")
+    String CarColor;
     @Column(name="DriverLisence")
     String DriverLisence;
     @Column(name="DriverLisence_ExpirationDate")
     Date DriverLisence_ExpirationDate;
     @Column(name="HouseID")
     int HouseID;
+    @Column(name="Address")
+    String Address;
+    @Column(name="isCitizen")
+    int isCitizen;
 }

@@ -11,6 +11,7 @@
 <body>
 <%
     String redirect=request.getParameter("redirectUrl");
+
 %>
 <div><%=redirect  %></div>
 <form method="POST" action="/login?redirectUrl=${param.redirectUrl}">

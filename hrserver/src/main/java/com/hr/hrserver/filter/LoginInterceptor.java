@@ -42,8 +42,8 @@ public class LoginInterceptor implements HandlerInterceptor {
                 e.printStackTrace();
             }
         }
-        SSOutil.redirectToSSOURL(request,response);
-//        response.sendRedirect("http://localhost:8085/login.jsp?redirectUrl="+request.getRequestURL());
+//        SSOutil.redirectToSSOURL(request,response);
+        response.sendRedirect("http://localhost:8085/login.jsp?redirectUrl="+request.getRequestURL());
         return false;
 
 

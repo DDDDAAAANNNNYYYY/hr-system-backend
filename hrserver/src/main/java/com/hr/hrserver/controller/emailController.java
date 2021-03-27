@@ -23,17 +23,17 @@ public class emailController {
         System.out.println(email);
         String token = JWT.create().sign(Algorithm.HMAC256(tokenSecret));
         //with https:// has insecure problem
-        String text = "To register, please click : http://10.0.0.17:8081/email_validation?token=" + token;
+        String text = "To register, please click : http://10.0.0.17:8081/email_validation?token="
+                + token + "&email="+email;
         eservice.sendEmail(email, text);
         return "success";
     }
     @RequestMapping("/email_validation")
-    @ResponseBody
-    public String toRegister(@RequestParam("token") String token) {
+    public String toRegister(@RequestParam("token") String token, @RequestParam("email") String email) {
         //check if the token in database=> flag
         System.out.println(token);
         if(true) {
-            return "register";
+            return "redirect:http://localhost:4200#/onboarding/?email=" + email;
         } else {
             return "error";
         }
