@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class User {
     // id
     @Id
-    private String id;
+    private int id;
 
     @Column(name="UserName")
     private String username;
@@ -50,11 +50,11 @@ public class User {
         this.modifiedDate = modifiedDate;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

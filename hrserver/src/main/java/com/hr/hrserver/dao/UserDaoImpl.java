@@ -28,4 +28,15 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
         User u = (User)query.list().get(0);
         return  u ;
     }
+    public int findIdbyNmae(String username) {
+        Query query = getCurrentSession().createQuery("from User u where u.username=:uname ");
+        Transaction tx = getCurrentSession().beginTransaction();
+        query.setParameter("uname", username);
+
+        if(CollectionUtils.isEmpty(query.list())) {
+            return -1;
+        }
+        User u = (User)query.list().get(0);
+        return  u.getId() ;
+    }
 }

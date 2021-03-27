@@ -14,15 +14,5 @@ public class VisaStatusDao extends BaseDaoImpl {
         super(VisaStatus.class);
     }
 
-    public List<VisaStatus> getVisaById(int id){
-        Query query = getCurrentSession().createQuery("from VisaStatus c where c.EmployeeID=:eid");
-        Transaction tx = getCurrentSession().beginTransaction();
-        query.setParameter("eid", id);
-        if(CollectionUtils.isEmpty(query.list())) {
-            return null;
-        }
-        List<VisaStatus> visaList = query.list();
-        tx.commit();
-        return visaList;
-    }
+
 }

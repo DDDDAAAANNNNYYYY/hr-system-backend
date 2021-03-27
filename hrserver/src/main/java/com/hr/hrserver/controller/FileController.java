@@ -17,13 +17,13 @@ public class FileController {
     private final Path rootLocation = Paths.get("./");
 
     @PostMapping("/savefile")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file,String name) {
+    public ResponseEntity<String> handleFileUpload( MultipartFile file) {
         String message;
         System.out.println("get here a");
         try {
             try {
                 System.out.println("get here b");
-                Files.copy(file.getInputStream(), this.rootLocation.resolve("abc.pdf"));
+                Files.copy(file.getInputStream(), this.rootLocation.resolve("abcd.pdf"));
                 System.out.println("get here c");
             } catch (Exception e) {
                 throw new RuntimeException("FAIL!");
@@ -31,7 +31,7 @@ public class FileController {
             files.add(file.getOriginalFilename());
             System.out.println(file.getOriginalFilename());
             System.out.println(file.getName());
-            System.out.println(name);
+
 
             message = "Successfully uploaded!";
             return ResponseEntity.status(HttpStatus.OK).body(message);
