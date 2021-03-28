@@ -2,6 +2,8 @@ package com.hr.hrserver.controller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.hr.hrserver.dao.registrationTokenDaoImpl;
+import com.hr.hrserver.pojo.RegistrationToken;
 import com.hr.hrserver.service.emailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Date;
 
 @Controller
 @CrossOrigin
@@ -22,6 +26,14 @@ public class emailController {
     public String hrSendEmail(@RequestParam("email") String email) {
         System.out.println(email);
         String token = JWT.create().sign(Algorithm.HMAC256(tokenSecret));
+        RegistrationToken rt = new RegistrationToken();
+        rt.setEmail(email);
+        rt.setToken(token);
+        Date d = new Date();
+        rt.setCreateBy(d);
+        registrationTokenDaoImpl rd = new registrationTokenDaoImpl();
+        rd.saveReigistrationToken(rt);
+
         //with https:// has insecure problem
         String text = "To register, please click : http://10.0.0.17:8081/email_validation?token="
                 + token + "&email="+email;

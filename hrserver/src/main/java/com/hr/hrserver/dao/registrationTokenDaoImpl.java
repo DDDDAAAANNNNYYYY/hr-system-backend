@@ -18,6 +18,11 @@ public class registrationTokenDaoImpl extends BaseDaoImpl implements registratio
         if(CollectionUtils.isEmpty(query.list())){
             return false;
         }
+        tx.commit();
         return true;
     }
+    public void saveReigistrationToken(RegistrationToken rtoken) {
+        save(rtoken);
+    }
+
 }

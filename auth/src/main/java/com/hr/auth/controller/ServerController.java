@@ -67,7 +67,7 @@ public class ServerController {
             System.out.println("we got token");
             System.out.println("redre" + redirectUrl);
             User user = new User();
-            user.setId("123");
+            user.setId(123);
             user.setUsername("testname");
             user.setEmail("testEmail");
 

@@ -10,15 +10,12 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 public class VisaStatusDao extends BaseDaoImpl{
-    EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
-    UserDaoImpl userDao = new UserDaoImpl();
+
     public VisaStatusDao() {
         super(VisaStatus.class);
     }
-    public VisaStatus getVisaStatusByUsername(String username){
-        int id = userDao.findIdbyNmae(username);
-        Employee e = employeeDao.getEmployeeByUserId(id);
-        int eid = e.getID();
+    public VisaStatus getVisaStatusByEmployeId(int eid){
+
         Query query = getCurrentSession().createQuery("from VisaStatus v where v.EmployeeID=:eid");
         Transaction tx = getCurrentSession().beginTransaction();
         query.setParameter("eid", eid);

@@ -1,4 +1,5 @@
 package com.hr.hrserver.controller;
+import com.hr.hrserver.service.S3ServiceB;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,13 +19,16 @@ public class FileController {
 
     @PostMapping("/savefile")
     public ResponseEntity<String> handleFileUpload( MultipartFile file) {
+        S3ServiceB s3ServiceB = new S3ServiceB();
         String message;
         System.out.println("get here a");
         try {
             try {
                 System.out.println("get here b");
                 Files.copy(file.getInputStream(), this.rootLocation.resolve("abcd.pdf"));
+
                 System.out.println("get here c");
+                s3ServiceB.putFromInputStreamToS3(file.getInputStream(), file.getName());
             } catch (Exception e) {
                 throw new RuntimeException("FAIL!");
             }

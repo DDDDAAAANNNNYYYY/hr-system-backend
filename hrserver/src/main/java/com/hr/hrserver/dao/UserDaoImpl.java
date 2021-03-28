@@ -26,6 +26,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
             return null;
         }
         User u = (User)query.list().get(0);
+        tx.commit();
         return  u ;
     }
     public int findIdbyNmae(String username) {
@@ -37,6 +38,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao{
             return -1;
         }
         User u = (User)query.list().get(0);
+        tx.commit();
         return  u.getId() ;
     }
 }

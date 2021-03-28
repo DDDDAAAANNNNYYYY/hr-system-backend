@@ -23,6 +23,7 @@ public class EmployeeDaoImpl extends BaseDaoImpl implements EmployeeDao{
             return null;
         }
         Employee e = (Employee)query.list().get(0);
+        tx.commit();
         return  e ;
     }
 }

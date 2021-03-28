@@ -1,16 +1,16 @@
 package com.hr.hrserver.test;
 
-import com.hr.hrserver.dao.EmployeeDaoImpl;
-import com.hr.hrserver.pojo.Employee;
+import com.hr.hrserver.pojo.VisaStatus;
+import com.hr.hrserver.service.VisaService;
 import org.junit.Test;
 
 public class test {
 
-    private EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+    VisaService vs= new VisaService();
     @Test
     public void test() {
-        Employee e = employeeDao.getEmployeeByUserId(1);
-        System.out.println(e);
+        VisaStatus status = vs.getVisaStatusByName("dany");
+        System.out.println(status);
     }
 
 }

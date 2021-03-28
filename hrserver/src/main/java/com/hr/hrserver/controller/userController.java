@@ -21,11 +21,11 @@ public class userController {
     @RequestMapping("/saveuser")
     public void saveuser(String username, String password) {
 
-        User user = new User();
-        user.setId("888");
-        user.setUsername(username);
-        user.setPassword(password);
-        System.out.println(user);
-        userDao.save(user);
+//        User user = new User();
+//        user.setId("888");
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        System.out.println(user);
+//        userDao.save(user);
     }
 }
