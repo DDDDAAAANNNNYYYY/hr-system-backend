@@ -84,7 +84,7 @@ public class S3ServiceB {
         S3Client s3 = S3Client.builder().region(region).build();
         s3.putObject(PutObjectRequest.builder().bucket(bucket).key(keyName)
                         .build(),
-                RequestBody.fromInputStream(in,1024*100));
+                RequestBody.fromInputStream(in,1024));
         s3.close();
     }
 }

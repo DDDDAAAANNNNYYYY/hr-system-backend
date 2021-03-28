@@ -39,6 +39,7 @@
 		<mapping class="com.hr.auth.pojo.Contact"/>
 		<mapping class="com.hr.auth.pojo.Document"/>
 		<mapping class="com.hr.hrserver.pojo.VisaStatus"/>
+		<mapping class="com.hr.hrserver.pojo.User"/>
 
     
     </session-factory>

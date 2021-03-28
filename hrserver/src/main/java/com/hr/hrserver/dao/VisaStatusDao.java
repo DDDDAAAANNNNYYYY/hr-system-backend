@@ -17,11 +17,11 @@ public class VisaStatusDao extends BaseDaoImpl{
     public VisaStatus getVisaStatusByEmployeId(int eid){
 
         Query query = getCurrentSession().createQuery("from VisaStatus v where v.EmployeeID=:eid");
-        Transaction tx = getCurrentSession().beginTransaction();
+//        Transaction tx = getCurrentSession().beginTransaction();
         query.setParameter("eid", eid);
         VisaStatus v = (VisaStatus)query.list().get(0);
 
-        tx.commit();
+//        tx.commit();
 
         return v;
     }

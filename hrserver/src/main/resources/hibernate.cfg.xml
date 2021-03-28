@@ -36,6 +36,7 @@
 		<mapping class="com.hr.hrserver.pojo.Employee"/>
 		<mapping class="com.hr.hrserver.pojo.RegistrationToken"/>
 		<mapping class="com.hr.hrserver.pojo.VisaStatus"/>
+		<mapping class="com.hr.hrserver.pojo.User"/>
 
     
     </session-factory>

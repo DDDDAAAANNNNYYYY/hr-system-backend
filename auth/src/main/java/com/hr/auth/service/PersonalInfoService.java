@@ -32,9 +32,9 @@ public class PersonalInfoService {
     DocumentsDaoAuthAuth documentsDaoAuthAuth = new DocumentsDaoAuthAuth();
     VisaStatusDao visaStatusDao = new VisaStatusDao();
 
-    public PersonalInfo getPersonalInfobyEmail(String email){
-        List<Employee> e = employeeDao.getEmployeeByUserEmail(email);
-        Employee emp = e.get(0);
+    public PersonalInfo getPersonalInfobyUname(String username){
+        Employee emp = employeeDao.getEmployeeByUserName(username);
+
         int id = emp.getID();
         List<Contact> contactList = contactDao.getContactListbyEmployeeId(id);
 
@@ -62,9 +62,9 @@ public class PersonalInfoService {
         p.setVisaStartDate(vs.getVisaStartDate());
         p.setContacts(contactList);
         System.out.println(vs);
-        System.out.println(e);
+
         System.out.println(contactList);
         System.out.println(documents);
-        return null;
+        return p;
     }
 }

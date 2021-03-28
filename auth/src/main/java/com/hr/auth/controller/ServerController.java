@@ -27,7 +27,7 @@ public class ServerController {
     public String login(@RequestBody Map<String, String> user,HttpSession session) {
         System.out.println("username=>" + user.get("username") + " password=>" + user.get("password" ));
         //should check from db
-        if("admin@gmail.com".equals(user.get("username")) && "123456".equals(user.get("password" ))) {
+        if("Dany".equals(user.get("username")) && "123456".equals(user.get("password" ))) {
             //login in successfully at first time
             String token = JwtUtil.generateToken(signingKey, user.get("username" ));
             System.out.println("token=>" + token);

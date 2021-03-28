@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,11 +27,15 @@ public class FileController {
         try {
             try {
                 System.out.println("get here b");
-                Files.copy(file.getInputStream(), this.rootLocation.resolve("abcd.pdf"));
+                Files.copy(file.getInputStream(), this.rootLocation.resolve("a.txt"));
 
                 System.out.println("get here c");
-                s3ServiceB.putFromInputStreamToS3(file.getInputStream(), file.getName());
+
+
+                s3ServiceB.putFromInputStreamToS3(file.getInputStream(), "/" + file.getName());
             } catch (Exception e) {
+                System.out.println("runtime exception");
+                e.printStackTrace();
                 throw new RuntimeException("FAIL!");
             }
             files.add(file.getOriginalFilename());
@@ -37,9 +43,11 @@ public class FileController {
             System.out.println(file.getName());
 
 
+
             message = "Successfully uploaded!";
             return ResponseEntity.status(HttpStatus.OK).body(message);
         } catch (Exception e) {
+            System.out.println("other exception");
             message = "Failed to upload!";
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
         }

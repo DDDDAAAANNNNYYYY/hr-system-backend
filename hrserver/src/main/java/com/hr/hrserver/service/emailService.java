@@ -26,4 +26,18 @@ public class emailService {
             e.printStackTrace();
         }
     }
+    public void sendNotify(String email, String text) {
+        try {
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+
+            //need to save RegistrationToken--to be implemented.
+            simpleMailMessage.setTo(email);
+            simpleMailMessage.setSubject("Visa Update Notification");
+            simpleMailMessage.setFrom("registerhr2021@gmail.com");
+            simpleMailMessage.setText(text);
+            mailSender.send(simpleMailMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
