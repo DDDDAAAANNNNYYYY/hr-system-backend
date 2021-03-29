@@ -2,16 +2,15 @@ package com.hr.hrserver.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name="Employee")
 public class Employee {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     int ID;
     @Column(name="UserID")
@@ -62,4 +61,7 @@ public class Employee {
     String Address;
     @Column(name="isCitizen")
     int isCitizen;
+//    @OneToMany(mappedBy = "EmployeeID"
+//    )
+//    List<Contact> contactList;
 }

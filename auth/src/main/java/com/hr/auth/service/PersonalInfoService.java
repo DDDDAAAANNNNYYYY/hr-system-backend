@@ -49,17 +49,17 @@ public class PersonalInfoService {
         String[] addr = address.split(",");
         p.setPrimaryAddress(addr[0]);
         p.setSecondaryAddress(addr[1]);
-        p.setSSN(emp.getSSN());
+        p.setSsn(emp.getSSN());
         p.setGender(emp.getGender());
         p.setEmail(emp.getEmail());
         p.setCellphone(emp.getCellPhone());
-        p.setWorkphone(emp.getAlternatePhone());
+        p.setWorkPhone(emp.getAlternatePhone());
         p.setIsCitizenOrPerm(""+emp.getIsCitizen());
-        p.setStartDate(emp.getStartDate());
-        p.setEndDate(emp.getEndDate());
-        p.setTitle(emp.getTitle());
-        p.setVisaEndDate(vs.getVisaEndDate());
-        p.setVisaStartDate(vs.getVisaStartDate());
+        p.setEmploymentStart(emp.getStartDate().toString());
+        p.setEmploymentEnd("abc"+emp.getEndDate().toString()+"abc");
+        p.setEmploymentTitle(emp.getTitle());
+        p.setWorkAuthOtherStart(vs.getVisaEndDate().toString());
+        p.setWorkAuthOtherEnd(vs.getVisaStartDate());
         p.setContacts(contactList);
         System.out.println(vs);
 

@@ -16,24 +16,24 @@ public class PersonalInfo {
     String name;
     String preferredName;
     String DOB;
-    String SSN;
+    String ssn;
     String email;
-    String workphone;
+    String workPhone;
     String cellphone;
     String primaryAddress;
     String secondaryAddress;
     List<Contact> contacts;
     //work authorizatioon
     String visaType;
-    Date startDate;
-    Date endDate;
+    String employmentStart;
+    String employmentEnd;
     String title;
     String Gender;
     String isCitizenOrPerm;
     String workAuth;
-    Date VisaStartDate;
-    Date VisaEndDate;
+    String workAuthOtherStart;
+    Date workAuthOtherEnd;
     String Visatype;
-    String empTitle;
+    String employmentTitle;
 //    List<Document> personalDocuments;
 }

@@ -45,7 +45,7 @@ public class emailController {
         //check if the token in database=> flag
         System.out.println(token);
         if(true) {
-            return "redirect:http://localhost:4200#/onboarding/?email=" + email;
+            return "redirect:http://localhost:4200/register?email=" + email;
         } else {
             return "error";
         }

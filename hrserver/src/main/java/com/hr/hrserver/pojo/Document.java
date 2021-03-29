@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Setter
@@ -17,6 +14,7 @@ import java.util.Date;
 @Table(name="PersonalDocument")
 public class Document {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int ID;
     @Column(name="EmployeeID")
     int EmployeeID;

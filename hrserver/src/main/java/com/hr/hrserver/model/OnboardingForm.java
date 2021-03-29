@@ -286,11 +286,19 @@ public class OnboardingForm {
     public void setEmergencyContacts(List emergencyContacts) {
         this.emergencyContacts = emergencyContacts;
     }
+    public String getAvatar() {
+        return avatar;
+    }
 
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
     private String firstName;
     private String lastName;
     private String middleName;
     private String preferredName;
+
+    private String avatar;
 
     private String address;
     private String cellPhone;

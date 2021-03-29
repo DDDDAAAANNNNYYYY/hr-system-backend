@@ -2,10 +2,7 @@ package com.hr.hrserver.pojo;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -16,6 +13,7 @@ import java.util.Date;
 @Table(name="RegistrationToken")
 public class RegistrationToken {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ID")
     public String ID;
     @Column(name="Token")

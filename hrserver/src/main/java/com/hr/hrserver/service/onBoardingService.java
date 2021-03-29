@@ -2,94 +2,72 @@ package com.hr.hrserver.service;
 
 
 import com.hr.hrserver.dao.*;
+import com.hr.hrserver.model.OnboardingForm;
 import com.hr.hrserver.pojo.Contact;
 import com.hr.hrserver.pojo.Employee;
 import com.hr.hrserver.pojo.PersonalDocument;
 import com.hr.hrserver.util.UtilFunction;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-class OnboardingInputForm{
-    int userId;
-    String firstName;
-    String lastName;
-    String midName;
-    String preferredName;
-    String avatar;
-    String ssn;
-    Date dob;
-    String gender;
-    //contact info
-    String address;
-    String cellPhone;
-    String workPhone;
-    String email;
-    //car & driver license info
-    String carBrand;
-    String carModel;
-    String carColor;
-    String driverLicenseNumber;
-    Date driverLicenseExpirationDate;
-    //migration info
-    boolean isCitizen;
-    File workAuthDoc;
-    //contact & refer
-    List<Contact> contactList;
-    Contact referer;
-}
+import java.util.*;
 
+
+@Service
 public class onBoardingService {
 
-    public void saveOnboardingData(Map<Object, Object> onboardingInput){
+    public void saveOnboardingData(OnboardingForm onboardingInput){
 
         //save to table employee
         Employee employee = new Employee();
 
         //find userID by user name
         UserDaoImpl userDao = new UserDaoImpl();
-        int userId = userDao.findIdbyNmae((String) onboardingInput.get("username"));
+        int userId = userDao.findIdbyEmail((String) onboardingInput.getEmail());
 
-        employee.setFirstName((String) onboardingInput.get("firstName"));
-        employee.setLastName((String) onboardingInput.get("lastName"));
-        employee.setMiddleName((String) onboardingInput.get("midName"));
-        employee.setPreferredName((String) onboardingInput.get("preferredName"));
+        employee.setFirstName((String) onboardingInput.getFirstName());
+        employee.setLastName((String) onboardingInput.getLastName());
+        employee.setMiddleName((String) onboardingInput.getMiddleName());
+        employee.setPreferredName((String) onboardingInput.getPreferredName());
 
         //use default avatar
         employee.setAvatar("");
         //save avatar to s3
         //employee.setAvatar(onboardingInputForm.avatar);
 
-        employee.setSSN((String) onboardingInput.get("ssn"));
+        employee.setSSN((String) onboardingInput.getSSN());
 
         //parse date
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        String sqlDate = sdf.format();
 //        employee.setDOB(sqlDate);
-        employee.setDOB((Date) onboardingInput.get("dob"));
+        employee.setDOB((Date) onboardingInput.getBirthday());
 
-        employee.setGender((String) onboardingInput.get("gender"));
-        employee.setCellPhone((String) onboardingInput.get("cellPhone"));
-        employee.setAlternatePhone((String) onboardingInput.get("workPhone"));
-        employee.setEmail((String) onboardingInput.get("email"));
-        employee.setAddress((String) onboardingInput.get("address"));
+        employee.setGender((String) onboardingInput.getGender());
+        employee.setCellPhone((String) onboardingInput.getCellPhone());
+        employee.setAlternatePhone((String) onboardingInput.getWorkPhone());
+        employee.setEmail((String) onboardingInput.getEmail());
+        employee.setAddress((String) onboardingInput.getAddress());
 
         employee.setStartDate(UtilFunction.getTodayDate());
 
-        employee.setCar((String) onboardingInput.get("carBrand"));
-        employee.setCarModel((String) onboardingInput.get("carModel"));
-        employee.setCarColor((String) onboardingInput.get("carColor"));
-        employee.setDriverLisence((String) onboardingInput.get("driverLicenseNumber"));
+//        employee.setCar((String) onboardingInput.getC("carBrand"));
+//        employee.setCarModel((String) onboardingInput.get("carModel"));
+//        employee.setCarColor((String) onboardingInput.get("carColor"));
+        employee.setDriverLisence((String) onboardingInput.getDriverLicenseNumber());
 
 //        parse date
 //        employee.setDriverLisence_ExpirationDate(
 //         (Date) onboardingInput.get("driverLicenseExpirationDate")
 //         );
-        employee.setDOB((Date) onboardingInput.get("dob"));
+//        employee.setDOB((Date) onboardingInput.get("dob"));
 
-        employee.setIsCitizen((boolean) onboardingInput.get("isCitizen")?1:0);
+        employee.setIsCitizen(onboardingInput.getIsCitizenOrPerm()=="yes"?1:0);
 
         EmployeeDaoImpl employeeDaoImpl = new EmployeeDaoImpl();
         int employeeID = (int) employeeDaoImpl.save(employee);
@@ -97,27 +75,49 @@ public class onBoardingService {
         //save to table contact
         ContactDaoImpl cdi = new ContactDaoImpl();
 
+//        System.out.println(onboardingInput.getEmergencyContacts().get(0));
+
+        List<Contact> mycontacts = new ArrayList<>();
+        for(int i = 0; i < onboardingInput.getEmergencyContacts().size(); i++) {
+            Contact c = new Contact();
+            String name = "" +((HashMap) onboardingInput.getEmergencyContacts().get(i)).get("emergencyContactFirstName")+((HashMap) onboardingInput.getEmergencyContacts().get(i)).get("emergencyContactMiddleName") +((HashMap) onboardingInput.getEmergencyContacts().get(i)).get("emergencyContactLastName");
+            c.setContactsName(name);
+            String email = ""+((HashMap) onboardingInput.getEmergencyContacts().get(i)).get("emergencyContactEmail");
+            c.setContactEmail(email);
+            c.setEmployeeID(employeeID);
+            c.setPhone(""+((HashMap) onboardingInput.getEmergencyContacts().get(i)).get("emergencyContactPhone"));
+            c.setRelationship(""+((HashMap) onboardingInput.getEmergencyContacts().get(i)).get("emergencyContactRelastionship"));
+            mycontacts.add(c);
+            System.out.println(mycontacts);
+        }
+        cdi.saveAll(mycontacts);
         //assemble and save
-        cdi.saveAll((List) onboardingInput.get("contactList"));
+//        cdi.saveAll( onboardingInput.getEmergencyContacts());
 //        cdi.saveOrupdate(onboardingInput.get("referer"));
 
         //save to table PersonalDocument
         PersonalDocument personalDocument = new PersonalDocument();
         personalDocument.setEmployeeID(employeeID);
         personalDocument.setCreatedDate(UtilFunction.getTodayDate());
-        personalDocument.setComment("Work Authorization Document");
+        personalDocument.setComment("WorkAuth");
         personalDocument.setPath(
-                userId+"/"+((File) onboardingInput.get("workAuthDoc")).getName()
+               onboardingInput.getWorkAuthFile()
         );
-        PersonalDocumentDaoImpl pddi = new PersonalDocumentDaoImpl();
-        pddi.save(personalDocument);
+        PersonalDocument avadar = new PersonalDocument();
+        avadar.setEmployeeID(employeeID);
+        avadar.setCreatedDate(UtilFunction.getTodayDate());
+        avadar.setComment("avadar");
+        avadar.setPath(
+                onboardingInput.getWorkAuthFile()
+        );
+
 
         //save workAuthDoc to s3
 //        S3Controller s3 = new S3Controller();
 //        s3.uploadToS3(userId, onboardingInputForm.workAuthDoc);
 
         // assign a not-fully-occupied-house (occupant<4) to this new user
-        HouseDaoImpl hdi = new HouseDaoImpl();
-        hdi.assignHouse(userId);
+//        HouseDaoImpl hdi = new HouseDaoImpl();
+//        hdi.assignHouse(userId);
     }
 }

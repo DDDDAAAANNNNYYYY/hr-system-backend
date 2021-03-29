@@ -32,12 +32,31 @@
     	
 
 		
-    	<mapping class="com.hr.hrserver.pojo.User"/>
+
+		<mapping class="com.hr.hrserver.pojo.VisaStatus"/>
+
+		<mapping class="com.hr.hrserver.pojo.Contact"/>
+
+		<mapping class="com.hr.hrserver.pojo.HouseDetail"/>
+
+
+		<mapping class="com.hr.hrserver.pojo.User"/>
 		<mapping class="com.hr.hrserver.pojo.Employee"/>
 		<mapping class="com.hr.hrserver.pojo.RegistrationToken"/>
-		<mapping class="com.hr.hrserver.pojo.VisaStatus"/>
-		<mapping class="com.hr.hrserver.pojo.User"/>
+		<mapping class="com.hr.hrserver.pojo.Address"/>
+		<mapping class="com.hr.hrserver.pojo.ApplicationWorkFlow"/>
+		<mapping class="com.hr.hrserver.pojo.Contact"/>
+<!--		<mapping class="com.hr.hrserver.pojo.DigitalDocument"/>-->
+		<mapping class="com.hr.hrserver.pojo.Facility"/>
+		<mapping class="com.hr.hrserver.pojo.FacilityReport"/>
+		<mapping class="com.hr.hrserver.pojo.House"/>
+		<mapping class="com.hr.hrserver.pojo.PersonalDocument"/>
+		<mapping class="com.hr.hrserver.pojo.Role"/>
+		<mapping class="com.hr.hrserver.pojo.FacilityReportDetail"/>
 
-    
-    </session-factory>
+
+
+
+
+	</session-factory>
 </hibernate-configuration>

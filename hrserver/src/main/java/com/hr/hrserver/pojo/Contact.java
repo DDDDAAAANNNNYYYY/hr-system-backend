@@ -1,18 +1,18 @@
 package com.hr.hrserver.pojo;
 
 import lombok.*;
+import org.hibernate.annotations.GeneratorType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-
+@Setter
+@Getter
 @Data
 @Entity
 @Table(name="Contact")
 public class Contact {
-    @Id
+    @Id()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int ID;
     @Column(name="EmployeeID")
     int EmployeeID;
@@ -26,4 +26,13 @@ public class Contact {
     int isEmergency;
     @Column(name="isLandlord")
     int isLandlord;
+    @Column(name="Name")
+    String contactsName;
+    @Column(name="cellPhone")
+    String phone;
+    @Column(name="Email")
+    String contactEmail;
+//    @ManyToOne
+//    @JoinColumn(name = "EmployeeID")
+//    Employee e;
 }

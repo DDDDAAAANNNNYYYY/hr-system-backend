@@ -2,10 +2,7 @@ package com.hr.hrserver.pojo;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -17,6 +14,7 @@ import java.util.Date;
 @Table(name="VisaStatus")
 public class VisaStatus {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int ID;
     @Column(name="EmployeeID")
     int EmployeeID;
