@@ -17,7 +17,7 @@ import java.util.HashMap;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-    //这个方法是在访问接口之前执行的，我们只需要在这里写验证登陆状态的业务逻辑，就可以在用户调用指定接口之前验证登陆状态了
+
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
         Boolean isLogin = (Boolean) session.getAttribute("isLogin");
@@ -43,7 +43,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
 //        SSOutil.redirectToSSOURL(request,response);
-        response.sendRedirect("http://localhost:8085/login.jsp?redirectUrl="+request.getRequestURL());
+        response.sendRedirect("http://localhost:4200/login?redirectUrl="+request.getRequestURL());
         return false;
 
 

@@ -30,10 +30,11 @@ public class PersonalInfo {
     String title;
     String Gender;
     String isCitizenOrPerm;
-    String workAuth;
+    String WorkAuth;
     String workAuthOtherStart;
     Date workAuthOtherEnd;
     String Visatype;
     String employmentTitle;
+    String avatar;
 //    List<Document> personalDocuments;
 }

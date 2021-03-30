@@ -7,12 +7,10 @@ import com.hr.hrserver.pojo.RegistrationToken;
 import com.hr.hrserver.service.emailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Map;
 
 @Controller
 @CrossOrigin
@@ -20,17 +18,24 @@ public class emailController {
     @Autowired
     private emailService eservice;
     private String tokenSecret = "my-secret-string";
+    @Autowired
+    registrationTokenDaoImpl registrationTokenDao;
 
-    @RequestMapping("/sendEmail")
+    @PostMapping("/sendEmail")
     @ResponseBody
-    public String hrSendEmail(@RequestParam("email") String email) {
+    public String hrSendEmail(@RequestBody Map<String,String> info) {
+        System.out.println(info);
+        String email = info.get("email");
         System.out.println(email);
+
+        tokenSecret = tokenSecret + (new Date()).toString();
         String token = JWT.create().sign(Algorithm.HMAC256(tokenSecret));
         RegistrationToken rt = new RegistrationToken();
         rt.setEmail(email);
         rt.setToken(token);
         Date d = new Date();
         rt.setCreateBy(d);
+
         registrationTokenDaoImpl rd = new registrationTokenDaoImpl();
         rd.saveReigistrationToken(rt);
 
@@ -44,8 +49,8 @@ public class emailController {
     public String toRegister(@RequestParam("token") String token, @RequestParam("email") String email) {
         //check if the token in database=> flag
         System.out.println(token);
-        if(true) {
-            return "redirect:http://localhost:4200/register?email=" + email;
+        if(registrationTokenDao.isValidToken(token)) {
+            return "redirect:http://localhost:4200/register?email=" + email + "&token="+token;
         } else {
             return "error";
         }

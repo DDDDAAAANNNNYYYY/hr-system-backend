@@ -1,16 +1,15 @@
 package com.hr.auth.service;
 
-import com.hr.auth.dao.base.ContactDaoAuthAuth;
-import com.hr.auth.dao.base.DocumentsDaoAuthAuth;
-import com.hr.auth.dao.base.EmployeeDaoAuthImplAuth;
-import com.hr.auth.dao.base.VisaStatusDao;
+
 import com.hr.auth.db.PersonalInfo;
 
 
+import com.hr.hrserver.dao.*;
 import com.hr.hrserver.pojo.Contact;
 import com.hr.hrserver.pojo.Document;
 import com.hr.hrserver.pojo.Employee;
 import com.hr.hrserver.pojo.VisaStatus;
+import com.hr.hrserver.test.ContactDaoAuthAuth;
 import org.junit.runner.RunWith;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,20 +24,20 @@ import java.util.List;
 @Component
 public class PersonalInfoService {
 
-    EmployeeDaoAuthImplAuth employeeDao = new EmployeeDaoAuthImplAuth();
+    EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
 
-    ContactDaoAuthAuth contactDao = new ContactDaoAuthAuth();
+    ContactDaoImpl contactDao = new ContactDaoImpl();
 
-    DocumentsDaoAuthAuth documentsDaoAuthAuth = new DocumentsDaoAuthAuth();
+    PersonalDocumentDaoImpl documentsDao = new PersonalDocumentDaoImpl();
     VisaStatusDao visaStatusDao = new VisaStatusDao();
 
     public PersonalInfo getPersonalInfobyUname(String username){
         Employee emp = employeeDao.getEmployeeByUserName(username);
 
         int id = emp.getID();
-        List<Contact> contactList = contactDao.getContactListbyEmployeeId(id);
+        List<Contact> contactList = contactDao.getAllContactByEmployeeID(id);
 
-        List<Document> documents = documentsDaoAuthAuth.getDocumentListbyEmployeeId(id);
+        List<Document> documents = documentsDao.getDocumentListbyEmployeeId(id);
         List<VisaStatus> vsList = visaStatusDao.getVisaById(id);
         VisaStatus vs = vsList.get(0);
         PersonalInfo p = new PersonalInfo();
@@ -61,6 +60,8 @@ public class PersonalInfoService {
         p.setWorkAuthOtherStart(vs.getVisaEndDate().toString());
         p.setWorkAuthOtherEnd(vs.getVisaStartDate());
         p.setContacts(contactList);
+        p.setWorkAuth(vs.getVisaType());
+        p.setAvatar(emp.getAvatar());
         System.out.println(vs);
 
         System.out.println(contactList);

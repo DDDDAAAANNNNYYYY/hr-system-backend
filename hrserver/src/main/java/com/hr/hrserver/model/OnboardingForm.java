@@ -1,47 +1,54 @@
 package com.hr.hrserver.model;
 
+import lombok.*;
+
 import java.io.File;
 import java.util.Date;
 import java.util.List;
-
+@Getter
+@Setter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class OnboardingForm {
-    @Override
-    public String toString() {
-        return "OnboardingForm{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", preferredName='" + preferredName + '\'' +
-
-                ", address='" + address + '\'' +
-                ", cellPhone='" + cellPhone + '\'' +
-                ", workPhone='" + workPhone + '\'' +
-                ", email='" + email + '\'' +
-                ", SSN='" + SSN + '\'' +
-                ", birthday=" + birthday +
-                ", gender='" + gender + '\'' +
-                ", isCitizenOrPerm='" + isCitizenOrPerm + '\'' +
-                ", greenCardOrCitizen='" + greenCardOrCitizen + '\'' +
-                ", workAuth='" + workAuth + '\'' +
-                ", workAuthOther='" + workAuthOther + '\'' +
-                ", workAuthOtherStart='" + workAuthOtherStart + '\'' +
-                ", workAuthOtherEnd='" + workAuthOtherEnd + '\'' +
-                ", workAuthFile='" + workAuthFile + '\'' +
-                ", hasDriverLicense='" + hasDriverLicense + '\'' +
-                ", driverLicenseNumber='" + driverLicenseNumber + '\'' +
-                ", driverLicenseExpirationDate=" + driverLicenseExpirationDate +
-
-                ", referred='" + referred + '\'' +
-                ", referFirstName='" + referFirstName + '\'' +
-                ", referLastName='" + referLastName + '\'' +
-                ", referMiddleName='" + referMiddleName + '\'' +
-                ", referPhone='" + referPhone + '\'' +
-                ", referAddress='" + referAddress + '\'' +
-                ", referEmail='" + referEmail + '\'' +
-                ", referRelationship='" + referRelationship + '\'' +
-                ", emergencyContacts=" + emergencyContacts +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "OnboardingForm{" +
+//                "firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", middleName='" + middleName + '\'' +
+//                ", preferredName='" + preferredName + '\'' +
+//                ", avatar=" +
+//
+//                ", address='" + address + '\'' +
+//                ", cellPhone='" + cellPhone + '\'' +
+//                ", workPhone='" + workPhone + '\'' +
+//                ", email='" + email + '\'' +
+//                ", SSN='" + SSN + '\'' +
+//                ", birthday=" + birthday +
+//                ", gender='" + gender + '\'' +
+//                ", isCitizenOrPerm='" + isCitizenOrPerm + '\'' +
+//                ", greenCardOrCitizen='" + greenCardOrCitizen + '\'' +
+//                ", workAuth='" + workAuth + '\'' +
+//                ", workAuthOther='" + workAuthOther + '\'' +
+//                ", workAuthOtherStart='" + workAuthOtherStart + '\'' +
+//                ", workAuthOtherEnd='" + workAuthOtherEnd + '\'' +
+//                ", workAuthFile='" + workAuthFile + '\'' +
+//                ", hasDriverLicense='" + hasDriverLicense + '\'' +
+//                ", driverLicenseNumber='" + driverLicenseNumber + '\'' +
+//                ", driverLicenseExpirationDate=" + driverLicenseExpirationDate +
+//
+//                ", referred='" + referred + '\'' +
+//                ", referFirstName='" + referFirstName + '\'' +
+//                ", referLastName='" + referLastName + '\'' +
+//                ", referMiddleName='" + referMiddleName + '\'' +
+//                ", referPhone='" + referPhone + '\'' +
+//                ", referAddress='" + referAddress + '\'' +
+//                ", referEmail='" + referEmail + '\'' +
+//                ", referRelationship='" + referRelationship + '\'' +
+//                ", emergencyContacts=" + emergencyContacts +
+//                '}';
+//    }
 
     public String getFirstName() {
         return firstName;

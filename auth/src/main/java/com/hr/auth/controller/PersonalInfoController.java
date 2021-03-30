@@ -12,9 +12,6 @@ public class PersonalInfoController {
     public PersonalInfo getPersonalInfo(@RequestBody String username) {
         PersonalInfoService pservice = new PersonalInfoService();
         PersonalInfo p = pservice.getPersonalInfobyUname(username);
-        System.out.println("###################");
-        System.out.println("we get here personal info");
-        System.out.println("person we get" + p);
         return p;
     }
 }

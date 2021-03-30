@@ -49,6 +49,65 @@ public class EmployeeDaoImpl extends BaseDaoImpl implements EmployeeDao{
         return result;
     }
 
+    public int getUserIDByEmployeeID(int eid){
+        Query query = getCurrentSession().createQuery("from Employee e where e.ID=:eid");
+        query.setParameter("eid", eid);
+        if(CollectionUtils.isEmpty(query.list())) {
+            return -1;
+        }
+        Employee e = (Employee)query.list().get(0);
+        return  e.getUserID();
+    }
+    public int getHouseIdByEmployeeId(int eid){
+        Query query = getCurrentSession().createQuery("from Employee e where e.ID=:eid");
+        Transaction tx = getCurrentSession().beginTransaction();
+        query.setParameter("eid", eid);
+        if(CollectionUtils.isEmpty(query.list())) {
+            return -1;
+        }
+        Employee e = (Employee)query.list().get(0);
+        tx.commit();
+        return  e.getHouseID();
+    }
+
+    public List<Integer> getAllEmployeeInAHouseId(int hid){
+        //following code works, yet it returns all fields of employee instead of list of eid
+//        Query query = getCurrentSession().createQuery("from Employee e where e.HouseID=:hid");
+//        query.setParameter("hid", hid);
+//        if(CollectionUtils.isEmpty(query.list())) {
+//            return null;
+//        }
+//        return  query.list();
+        String qry = "Select ID from Employee Where HouseID="+hid;
+        Query query = getCurrentSession().createSQLQuery(qry);
+        if(CollectionUtils.isEmpty(query.list())) {
+            return null;
+        }
+        return query.list();
+    }
+
+    public List<Employee> getAllEmployee(){
+        Query query = getCurrentSession().createQuery("from Employee");
+        return query.list();
+    }
+
+
+    public Employee getEmployeeByUserName(String uname) {
+        UserDaoImpl ud = new UserDaoImpl();
+        String email = (String)ud.findEmailbyNmae(uname);
+
+        Query query = getCurrentSession().createQuery("from  Employee e  where e.Email=:email");
+//
+        query.setParameter("email", email);
+//
+        Employee e = (Employee) query.list().get(0);
+
+//
+        return e;
+    }
+
+
+
 
 
 

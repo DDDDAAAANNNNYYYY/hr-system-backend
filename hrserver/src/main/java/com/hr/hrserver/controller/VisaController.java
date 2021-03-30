@@ -1,6 +1,9 @@
 package com.hr.hrserver.controller;
 
+import com.hr.hrserver.dao.PersonalDocumentDaoImpl;
+import com.hr.hrserver.dao.UserDaoImpl;
 import com.hr.hrserver.model.VisaChange;
+import com.hr.hrserver.pojo.PersonalDocument;
 import com.hr.hrserver.pojo.VisaStatus;
 import com.hr.hrserver.service.VisaService;
 import com.hr.hrserver.service.emailService;
@@ -13,12 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 @RestController
 public class VisaController {
     VisaService visaService = new VisaService();
     @Autowired
     emailService eservice = new emailService();
+    @Autowired
+    UserDaoImpl userDao;
+
+    PersonalDocumentDaoImpl pdao = new PersonalDocumentDaoImpl();
     @PostMapping("/getVisaStatus")
     public String getVisaStatus(@RequestBody String name){
         VisaStatus visatyep = visaService.getVisaStatusByName(name);
@@ -71,8 +79,25 @@ public class VisaController {
         return "change sucessful";
     }
     @PostMapping("/submitDoc")
-    public String changeVisaStatus(@RequestBody String url) {
+    public String submitDoc(@RequestBody Map<String, String> urlInfo) {
+        System.out.println("submitDoc");
+        String username = urlInfo.get("name");
+        String url = urlInfo.get("url");
+        String filetype = "I983";
+        int id = userDao.findIdbyNmae(username);
+        PersonalDocument pd = new PersonalDocument();
+        System.out.println("url"+ url);
+        pd.setEmployeeID(id);
+        Date d = new Date();
+        pd.setCreatedDate(d);
+        pd.setPath(url);
+        pd.setTitle(filetype);
+        pd.setComment("waiting for processing");
+        pdao.save(pd);
+
+
         System.out.println(url);
+        System.out.println(filetype);
         return "change sucessful";
     }
 
